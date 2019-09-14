@@ -3,6 +3,8 @@
 
 # Every Vagrant development environment requires a box. You can search for
 # boxes at https://atlas.hashicorp.com/search.
+# PLUGIN INFO - https://github.com/oscar-stack/vagrant-hosts
+# vagrant plugin install vagrant-hosts
 BOX_IMAGE = "bento/ubuntu-16.04"
 COUNT = 2
 HOSTNAME = "alexey"
@@ -17,6 +19,7 @@ Vagrant.configure("2") do |config|
       subconfig.vm.box = BOX_IMAGE
       subconfig.vm.hostname = "ubuntu-#{i}-#{HOSTNAME}"
       subconfig.vm.network :private_network, ip: "10.0.0.#{i + 10}"
+      subconfig.vm.provision :hosts, :sync_hosts => true
     end
   end
 
